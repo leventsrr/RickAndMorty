@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragments.SplashFragment"
+        android:background="@color/black">
+
+        <!-- TODO: Update blank fragment layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iwImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/rick_and_morty_image" />
+
+            <TextView
+                android:id="@+id/twTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/splash_title"
+                android:textAlignment="center"
+                android:fontFamily="@font/avenir_black"
+                android:textSize="45sp"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/splash_greeting"
+                android:textAlignment="center"
+                android:fontFamily="@font/avenir_book"
+                android:textSize="40sp"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btnNavigateHome"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/splash_button_text"
+                android:backgroundTint="@color/green"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+
+                />
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>
