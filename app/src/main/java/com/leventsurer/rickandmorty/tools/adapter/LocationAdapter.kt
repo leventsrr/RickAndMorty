@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.leventsurer.rickandmorty.data.model.Results
 import com.leventsurer.rickandmorty.databinding.RowLocationBinding
 
 class LocationAdapter : RecyclerView.Adapter<LocationAdapter.LocationHolder>() {
@@ -14,7 +15,7 @@ class LocationAdapter : RecyclerView.Adapter<LocationAdapter.LocationHolder>() {
 
     }
 
-    var list = ArrayList<String>()
+    var list = ArrayList<Results>()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value

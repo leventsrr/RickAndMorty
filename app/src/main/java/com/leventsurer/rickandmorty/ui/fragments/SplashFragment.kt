@@ -1,5 +1,6 @@
 package com.leventsurer.rickandmorty.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -38,6 +39,7 @@ class SplashFragment : Fragment() {
         onClickHandler()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun getIsLoginInfo() {
         isLogin = sharedPrefViewModel.readIsLoginInfo()
         if (isLogin) binding.twGreeting.text = "Hello!" else binding.twGreeting.text = "Welcome!"
