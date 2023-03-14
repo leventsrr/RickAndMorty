@@ -1,7 +1,7 @@
 package com.leventsurer.rickandmorty.di
 
 import android.content.SharedPreferences
-import com.leventsurer.rickandmorty.api.RickAndMortyApi
+import com.leventsurer.rickandmorty.service.RickAndMortyService
 import com.leventsurer.rickandmorty.data.repository.SharedPrefManager
 import com.leventsurer.rickandmorty.tools.constant.RetrofitConstants.BASE_URL
 import dagger.Module
@@ -61,8 +61,8 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun getRetrofitServiceInstanceToCart(retrofit: Retrofit):RickAndMortyApi{
-        return retrofit.create(RickAndMortyApi::class.java)
+    fun getRetrofitServiceInstanceToCart(retrofit: Retrofit):RickAndMortyService{
+        return retrofit.create(RickAndMortyService::class.java)
     }
 
 }

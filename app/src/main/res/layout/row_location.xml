@@ -8,7 +8,7 @@
 
     <com.google.android.material.card.MaterialCardView
 
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         app:cardCornerRadius="10dp"
         android:elevation="5dp"
@@ -16,7 +16,7 @@
         android:layout_marginHorizontal="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
             <ImageView
@@ -49,7 +49,6 @@
                 android:layout_marginEnd="10dp"
                 android:fontFamily="@font/avenir_black"
                 android:gravity="center"
-                android:text="Earth"
                 android:textSize="25sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

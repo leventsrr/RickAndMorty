@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.leventsurer.rickandmorty.data.model.Results
+import com.leventsurer.rickandmorty.data.model.Result
 import com.leventsurer.rickandmorty.databinding.RowLocationBinding
 
 class LocationAdapter : RecyclerView.Adapter<LocationAdapter.LocationHolder>() {
@@ -15,7 +15,7 @@ class LocationAdapter : RecyclerView.Adapter<LocationAdapter.LocationHolder>() {
 
     }
 
-    var list = ArrayList<Results>()
+    var list = ArrayList<Result>()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
@@ -30,11 +30,12 @@ class LocationAdapter : RecyclerView.Adapter<LocationAdapter.LocationHolder>() {
 
     override fun onBindViewHolder(holder: LocationHolder, position: Int) {
         holder.binding.apply {
-            twLocationName.text = "Earth"
+            val currentItem = list[position]
+            twLocationName.text = currentItem.name
         }
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return list.size
     }
 }

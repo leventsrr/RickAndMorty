@@ -10,11 +10,9 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.leventsurer.rickandmorty.R
 import com.leventsurer.rickandmorty.data.model.Resource
-import com.leventsurer.rickandmorty.data.model.Results
+import com.leventsurer.rickandmorty.data.model.Result
 import com.leventsurer.rickandmorty.databinding.FragmentHomeBinding
-import com.leventsurer.rickandmorty.databinding.FragmentSplashBinding
 import com.leventsurer.rickandmorty.tools.adapter.CharacterAdapter
 import com.leventsurer.rickandmorty.tools.adapter.LocationAdapter
 import com.leventsurer.rickandmorty.viewModel.ApiViewModel
@@ -28,7 +26,7 @@ class HomeFragment : Fragment() {
 
     private val apiViewModel by viewModels<ApiViewModel>()
 
-    private var locationsAdapterList = ArrayList<Results>()
+    private var locationsAdapterList = ArrayList<Result>()
     private var characterList = ArrayList<String>()
 
     private lateinit var characterAdapter : CharacterAdapter
