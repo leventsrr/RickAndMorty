@@ -1,6 +1,7 @@
 package com.leventsurer.rickandmorty.tools.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -33,9 +34,21 @@ class LocationAdapter : RecyclerView.Adapter<LocationAdapter.LocationHolder>() {
             val currentItem = list[position]
             twLocationName.text = currentItem.name
         }
+        holder.itemView.setOnClickListener {
+            getLocationId.let {
+                if(it != null){
+                    it(list[position].id)
+                }
+            }
+        }
     }
 
     override fun getItemCount(): Int {
         return list.size
+    }
+
+    private var getLocationId: ((locationId: Int) -> Unit)? = null
+    fun getLocationId(f: ((locationId: Int) -> Unit)) {
+        getLocationId = f
     }
 }

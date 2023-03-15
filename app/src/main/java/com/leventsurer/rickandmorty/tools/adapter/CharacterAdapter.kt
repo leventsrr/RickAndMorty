@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.leventsurer.rickandmorty.data.model.MultipleCharacterModel
 import com.leventsurer.rickandmorty.databinding.RowCharacterBinding
 
 class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterHolder>() {
@@ -15,7 +16,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterHolder>(
 
     }
 
-    var list = ArrayList<String>()
+    var list = ArrayList<MultipleCharacterModel>()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
@@ -30,24 +31,24 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterHolder>(
 
     override fun onBindViewHolder(holder: CharacterHolder, position: Int) {
         holder.binding.apply {
-            twCharacterName.text = "Rick"
+            twCharacterName.text = list[position].name
         }
 
         holder.itemView.setOnClickListener{
             moveDetailPage.let {
                 if (it != null) {
-                    it(list[position])
+                    list[position].id?.let { it1 -> it(it1) }
                 }
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return list.size
     }
 
-    private var moveDetailPage: ((character: String) -> Unit)? = null
-    fun moveDetailPage(f: ((character: String) -> Unit)) {
+    private var moveDetailPage: ((character: Int) -> Unit)? = null
+    fun moveDetailPage(f: ((character: Int) -> Unit)) {
         moveDetailPage = f
     }
 }

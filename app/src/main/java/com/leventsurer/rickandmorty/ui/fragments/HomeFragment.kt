@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.leventsurer.rickandmorty.data.model.MultipleCharacterModel
 import com.leventsurer.rickandmorty.data.model.Resource
 import com.leventsurer.rickandmorty.data.model.Result
 import com.leventsurer.rickandmorty.databinding.FragmentHomeBinding
@@ -27,7 +28,8 @@ class HomeFragment : Fragment() {
     private val apiViewModel by viewModels<ApiViewModel>()
 
     private var locationsAdapterList = ArrayList<Result>()
-    private var characterList = ArrayList<String>()
+    private var characterAdapterList = ArrayList<MultipleCharacterModel>()
+    private var characterIdArray = ArrayList<Int>()
 
     private lateinit var characterAdapter : CharacterAdapter
     private lateinit var locationAdapter : LocationAdapter
@@ -51,7 +53,31 @@ class HomeFragment : Fragment() {
         setupLocationAdapter()
         setupCharacterAdapter()
         subscribeLocationsObserve()
+        subscribeLocationObserve()
+        subscribeCharactersById()
     }
+
+    private fun subscribeCharactersById() {
+        apiViewModel.characters.observe(viewLifecycleOwner){
+            when(it){
+                is Resource.Failure ->{
+                    Toast.makeText(requireContext(),it.exception.message,Toast.LENGTH_LONG).show()
+                }
+                is Resource.Loading ->{
+                }
+                is Resource.Success ->{
+                    characterAdapterList.clear()
+                    characterAdapterList.addAll(it.result)
+                    characterAdapter.list = characterAdapterList
+
+                }
+                else -> {
+                    Log.e("control","location observe function in else HomeFragment")
+                }
+            }
+        }
+    }
+
 
     private fun subscribeLocationsObserve() {
         apiViewModel.locations.observe(viewLifecycleOwner){
@@ -65,7 +91,6 @@ class HomeFragment : Fragment() {
                 is Resource.Success ->{
                     locationsAdapterList.clear()
                     locationsAdapterList.addAll(it.result.results)
-                    Log.e("kontrol",locationsAdapterList.toString())
                     locationAdapter.list = locationsAdapterList
                 }
                 else -> {
@@ -87,8 +112,35 @@ class HomeFragment : Fragment() {
         characterAdapter = CharacterAdapter()
         binding.rwCharacterList.adapter = characterAdapter
         characterAdapter.moveDetailPage {
-            val action = HomeFragmentDirections.actionHomeFragmentToCharacterDetailFragment(it)
-            findNavController().navigate(action)
+            //val action = HomeFragmentDirections.actionHomeFragmentToCharacterDetailFragment(it)
+            //findNavController().navigate(action)
+        }
+    }
+
+    private fun subscribeLocationObserve() {
+        apiViewModel.location.observe(viewLifecycleOwner){
+            when(it){
+                is Resource.Failure ->{
+                    Toast.makeText(requireContext(),it.exception.message,Toast.LENGTH_LONG).show()
+                }
+                is Resource.Loading ->{
+                }
+                is Resource.Success ->{
+                    for (residentLink in it.result.residents){
+                        val characterId = residentLink.split("/").last().toInt()
+                        Log.e("kontrol","tek id $characterId")
+                        characterIdArray.add(characterId)
+                    }
+
+                    runBlocking {
+                        apiViewModel.getMultipleCharacterById(characterIdArray)
+                    }
+
+                }
+                else -> {
+                    Log.e("control","location observe function in else HomeFragment")
+                }
+            }
         }
     }
 
@@ -96,6 +148,13 @@ class HomeFragment : Fragment() {
         binding.rwLocationList.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
         locationAdapter = LocationAdapter()
         binding.rwLocationList.adapter = locationAdapter
+        locationAdapter.getLocationId {
+
+            runBlocking {
+                Log.e("kontrol","id ye göre istek atıldı")
+                apiViewModel.getALocationById(it)
+            }
+        }
     }
 
 
