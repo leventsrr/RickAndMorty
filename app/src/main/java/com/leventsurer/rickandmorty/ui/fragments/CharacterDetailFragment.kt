@@ -5,14 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.leventsurer.rickandmorty.R
+import com.leventsurer.rickandmorty.data.model.CharacterDetailModel
 import com.leventsurer.rickandmorty.databinding.FragmentCharacterDetailBinding
-import com.leventsurer.rickandmorty.databinding.FragmentHomeBinding
 
 class CharacterDetailFragment : Fragment() {
     private var _binding: FragmentCharacterDetailBinding? = null
     private val binding: FragmentCharacterDetailBinding get() = _binding!!
-    lateinit var characterName : String
+    private lateinit var characterModel : CharacterDetailModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -31,12 +30,13 @@ class CharacterDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         handleArguments()
+        binding.name.text = characterModel.name
     }
 
     private fun handleArguments() {
         arguments.let {
-            characterName =
-                it?.let { it1 -> CharacterDetailFragmentArgs.fromBundle(it1).character }.toString()
+           // characterModel = CharacterDetailFragmentArgs.fromBundle(it!!).characterModel
+
         }
     }
 

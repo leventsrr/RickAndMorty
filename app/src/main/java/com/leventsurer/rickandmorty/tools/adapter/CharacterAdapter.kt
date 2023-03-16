@@ -1,11 +1,10 @@
 package com.leventsurer.rickandmorty.tools.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.leventsurer.rickandmorty.data.model.MultipleCharacterModel
+import com.leventsurer.rickandmorty.data.model.CharacterDetailModel
 import com.leventsurer.rickandmorty.databinding.RowCharacterBinding
 
 class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterHolder>() {
@@ -16,7 +15,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterHolder>(
 
     }
 
-    var list = ArrayList<MultipleCharacterModel>()
+    var list = ArrayList<CharacterDetailModel>()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
@@ -37,7 +36,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterHolder>(
         holder.itemView.setOnClickListener{
             moveDetailPage.let {
                 if (it != null) {
-                    list[position].id?.let { it1 -> it(it1) }
+                    it(list[position])
                 }
             }
         }
@@ -47,8 +46,8 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterHolder>(
         return list.size
     }
 
-    private var moveDetailPage: ((character: Int) -> Unit)? = null
-    fun moveDetailPage(f: ((character: Int) -> Unit)) {
+    private var moveDetailPage: ((character: CharacterDetailModel) -> Unit)? = null
+    fun moveDetailPage(f: ((character: CharacterDetailModel) -> Unit)) {
         moveDetailPage = f
     }
 }

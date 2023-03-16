@@ -2,7 +2,7 @@ package com.leventsurer.rickandmorty.service
 
 import com.leventsurer.rickandmorty.data.model.LocationByIdModel
 import com.leventsurer.rickandmorty.data.model.LocationsModel
-import com.leventsurer.rickandmorty.data.model.MultipleCharacterModel
+import com.leventsurer.rickandmorty.data.model.CharacterDetailModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,6 +16,6 @@ interface RickAndMortyService {
     suspend fun getALocationById(@Path("locationId") locationId:Int) : Response<LocationByIdModel>
 
     @GET("character/{characterIds}")
-    suspend fun getMultipleCharacter(@Path("characterIds") characterIds: ArrayList<Int>) :Response<ArrayList<MultipleCharacterModel>>
+    suspend fun getMultipleCharacter(@Path("characterIds") characterIds: ArrayList<Int>) :Response<ArrayList<CharacterDetailModel>>
 
 }

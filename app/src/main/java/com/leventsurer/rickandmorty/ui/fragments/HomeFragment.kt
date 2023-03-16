@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.leventsurer.rickandmorty.data.model.MultipleCharacterModel
+import com.leventsurer.rickandmorty.data.model.CharacterDetailModel
 import com.leventsurer.rickandmorty.data.model.Resource
 import com.leventsurer.rickandmorty.data.model.Result
 import com.leventsurer.rickandmorty.databinding.FragmentHomeBinding
@@ -28,7 +28,7 @@ class HomeFragment : Fragment() {
     private val apiViewModel by viewModels<ApiViewModel>()
 
     private var locationsAdapterList = ArrayList<Result>()
-    private var characterAdapterList = ArrayList<MultipleCharacterModel>()
+    private var characterAdapterList = ArrayList<CharacterDetailModel>()
     private var characterIdArray = ArrayList<Int>()
 
     private lateinit var characterAdapter : CharacterAdapter
@@ -113,7 +113,7 @@ class HomeFragment : Fragment() {
         binding.rwCharacterList.adapter = characterAdapter
         characterAdapter.moveDetailPage {
             //val action = HomeFragmentDirections.actionHomeFragmentToCharacterDetailFragment(it)
-            //findNavController().navigate(action)
+            // indNavController().navigate(action)
         }
     }
 
@@ -128,12 +128,12 @@ class HomeFragment : Fragment() {
                 is Resource.Success ->{
                     for (residentLink in it.result.residents){
                         val characterId = residentLink.split("/").last().toInt()
-                        Log.e("kontrol","tek id $characterId")
                         characterIdArray.add(characterId)
                     }
 
                     runBlocking {
                         apiViewModel.getMultipleCharacterById(characterIdArray)
+                        characterIdArray.clear()
                     }
 
                 }
@@ -153,7 +153,9 @@ class HomeFragment : Fragment() {
             runBlocking {
                 Log.e("kontrol","id ye göre istek atıldı")
                 apiViewModel.getALocationById(it)
+
             }
+
         }
     }
 

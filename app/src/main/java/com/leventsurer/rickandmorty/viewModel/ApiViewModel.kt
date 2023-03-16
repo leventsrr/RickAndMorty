@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.leventsurer.rickandmorty.data.model.LocationByIdModel
 import com.leventsurer.rickandmorty.data.model.LocationsModel
-import com.leventsurer.rickandmorty.data.model.MultipleCharacterModel
+import com.leventsurer.rickandmorty.data.model.CharacterDetailModel
 import com.leventsurer.rickandmorty.data.model.Resource
 import com.leventsurer.rickandmorty.data.repository.ApiRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,14 +19,14 @@ class ApiViewModel @Inject constructor(
 ) :ViewModel(){
 
 
-    private val _locations  : MutableLiveData<Resource<LocationsModel>?> = MutableLiveData()
+    private val _locations  : MutableLiveData<Resource<LocationsModel>?> = MutableLiveData(null)
     val locations : LiveData<Resource<LocationsModel>?> get() = _locations
 
-    private val _location  : MutableLiveData<Resource<LocationByIdModel>?> = MutableLiveData()
+    private val _location  : MutableLiveData<Resource<LocationByIdModel>?> = MutableLiveData(null)
     val location : LiveData<Resource<LocationByIdModel>?> get() = _location
 
-    private val _characters  : MutableLiveData<Resource<ArrayList<MultipleCharacterModel>>?> = MutableLiveData()
-    val characters : LiveData<Resource<ArrayList<MultipleCharacterModel>>?> get() = _characters
+    private val _characters  : MutableLiveData<Resource<ArrayList<CharacterDetailModel>>?> = MutableLiveData(null)
+    val characters : LiveData<Resource<ArrayList<CharacterDetailModel>>?> get() = _characters
 
 
      suspend fun getLocations() = viewModelScope.launch {
@@ -44,6 +44,7 @@ class ApiViewModel @Inject constructor(
     suspend fun getMultipleCharacterById(characterIds:ArrayList<Int>) = viewModelScope.launch {
         _characters.value = Resource.Loading
         val result = apiRepository.getMultipleCharacterById(characterIds)
+        Log.e("kontrol","result:$result")
         _characters.value = result
     }
 
