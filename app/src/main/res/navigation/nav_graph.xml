@@ -26,5 +26,9 @@
     <fragment
         android:id="@+id/characterDetailFragment"
         android:name="com.leventsurer.rickandmorty.ui.fragments.CharacterDetailFragment"
-        android:label="CharacterDetailFragment" />
+        android:label="CharacterDetailFragment" >
+        <argument
+            android:name="CharacterDetailModel"
+            app:argType="com.leventsurer.rickandmorty.data.model.CharacterDetailModel" />
+    </fragment>
 </navigation>

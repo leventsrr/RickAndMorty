@@ -112,8 +112,8 @@ class HomeFragment : Fragment() {
         characterAdapter = CharacterAdapter()
         binding.rwCharacterList.adapter = characterAdapter
         characterAdapter.moveDetailPage {
-            //val action = HomeFragmentDirections.actionHomeFragmentToCharacterDetailFragment(it)
-            // indNavController().navigate(action)
+            val action = HomeFragmentDirections.actionHomeFragmentToCharacterDetailFragment(it)
+            findNavController().navigate(action)
         }
     }
 

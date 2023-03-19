@@ -5,4 +5,11 @@
     <string name="splash_title">Rick And Morty</string>
     <string name="splash_greeting">Welcome</string>
     <string name="splash_button_text">explore</string>
+    <string name="characterStatusTitle">Status:</string>
+    <string name="characterSpecyTitle">Specy:</string>
+    <string name="characterGenderTitle">Gender:</string>
+    <string name="characterOriginTitle">Origin:</string>
+    <string name="characterLocationTitle">Location:</string>
+    <string name="characterEpisodesTitle">Episodes:</string>
+    <string name="characterCreatedAtTitle">Created at:</string>
 </resources>

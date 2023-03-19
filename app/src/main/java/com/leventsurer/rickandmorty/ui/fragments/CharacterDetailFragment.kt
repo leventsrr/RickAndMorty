@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.leventsurer.rickandmorty.data.model.CharacterDetailModel
 import com.leventsurer.rickandmorty.databinding.FragmentCharacterDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CharacterDetailFragment : Fragment() {
     private var _binding: FragmentCharacterDetailBinding? = null
     private val binding: FragmentCharacterDetailBinding get() = _binding!!
-    private lateinit var characterModel : CharacterDetailModel
+    private lateinit var characterDetailModel : CharacterDetailModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,12 +32,14 @@ class CharacterDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         handleArguments()
-        binding.name.text = characterModel.name
+        binding.name.text = characterDetailModel.name
     }
 
     private fun handleArguments() {
-        arguments.let {
-           // characterModel = CharacterDetailFragmentArgs.fromBundle(it!!).characterModel
+        arguments?.let {
+            val argsModel = CharacterDetailFragmentArgs.fromBundle(it).characterDetailModel
+            characterDetailModel = argsModel
+
 
         }
     }
