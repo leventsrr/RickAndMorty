@@ -149,15 +149,19 @@ class HomeFragment : Fragment() {
         locationAdapter = LocationAdapter()
         binding.rwLocationList.adapter = locationAdapter
         locationAdapter.getLocationId {
-
             runBlocking {
                 Log.e("kontrol","id ye göre istek atıldı")
                 apiViewModel.getALocationById(it)
+            }
+        }
 
+        locationAdapter.getSelectedLocation { position ->
+            for(i in 0 until locationsAdapterList.size){
+                locationsAdapterList[i].isSelected = i == position
             }
 
+            locationAdapter.list = locationsAdapterList
         }
     }
-
 
 }

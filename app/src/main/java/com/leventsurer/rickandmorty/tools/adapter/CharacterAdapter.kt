@@ -1,13 +1,17 @@
 package com.leventsurer.rickandmorty.tools.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.leventsurer.rickandmorty.R
 import com.leventsurer.rickandmorty.data.model.CharacterDetailModel
 import com.leventsurer.rickandmorty.databinding.RowCharacterBinding
 
 class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterHolder>() {
+    private lateinit var context: Context
 
 
     class CharacterHolder(val binding: RowCharacterBinding) :
@@ -23,6 +27,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterHolder>(
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterHolder {
+        context = parent.context
         val binding =
             RowCharacterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CharacterHolder(binding)
@@ -30,7 +35,21 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterHolder>(
 
     override fun onBindViewHolder(holder: CharacterHolder, position: Int) {
         holder.binding.apply {
-            twCharacterName.text = list[position].name
+            val currentItem = list[position]
+            twCharacterName.text = currentItem.name
+            Glide.with(context).load(currentItem.image).into(iwCharacterImage)
+            when (currentItem.gender) {
+                "Male" -> {
+                    iwCharacterGender.setImageResource(R.drawable.male)
+                }
+                "Female" -> {
+                    iwCharacterGender.setImageResource(R.drawable.female)
+                }
+                else -> {
+                    iwCharacterGender.setImageResource(R.drawable.genderless)
+                }
+            }
+
         }
 
         holder.itemView.setOnClickListener{
