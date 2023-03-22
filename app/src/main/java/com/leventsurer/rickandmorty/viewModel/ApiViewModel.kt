@@ -29,9 +29,10 @@ class ApiViewModel @Inject constructor(
     val characters : LiveData<Resource<ArrayList<CharacterDetailModel>>?> get() = _characters
 
 
-     suspend fun getLocations() = viewModelScope.launch {
+     suspend fun getLocations(pageNumber:Int) = viewModelScope.launch {
         _locations.value = Resource.Loading
-        val result = apiRepository.getLocations()
+        val result = apiRepository.getLocations(pageNumber)
+         Log.e("kontrol","ViewModel result $result")
         _locations.value = result
     }
 

@@ -1,6 +1,8 @@
 package com.leventsurer.rickandmorty.ui.fragments
 
+import android.os.Binder
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +14,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.leventsurer.rickandmorty.data.model.CharacterDetailModel
 import com.leventsurer.rickandmorty.data.model.Resource
 import com.leventsurer.rickandmorty.data.model.Result
@@ -20,6 +23,8 @@ import com.leventsurer.rickandmorty.tools.adapter.CharacterAdapter
 import com.leventsurer.rickandmorty.tools.adapter.LocationAdapter
 import com.leventsurer.rickandmorty.viewModel.ApiViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
@@ -33,6 +38,8 @@ class HomeFragment : Fragment() {
     private var characterAdapterList = ArrayList<CharacterDetailModel>()
     private var characterIdArray = ArrayList<Int>()
 
+    private var pageNumber = 1
+    private var isLoading = true
     private lateinit var characterAdapter: CharacterAdapter
     private lateinit var locationAdapter: LocationAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,13 +58,14 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getLocations()
+        getLocations(pageNumber)
         setupLocationAdapter()
         setupCharacterAdapter()
         subscribeLocationsObserve()
         subscribeLocationObserve()
         subscribeCharactersById()
     }
+
 
     private fun subscribeCharactersById() {
         apiViewModel.characters.observe(viewLifecycleOwner) {
@@ -95,6 +103,8 @@ class HomeFragment : Fragment() {
                     locationsAdapterList.clear()
                     locationsAdapterList.addAll(it.result.results)
                     locationAdapter.list = locationsAdapterList
+                    binding.pbLocationProgressBar.visibility = GONE
+                    binding.rwLocationList.visibility = VISIBLE
                 }
                 else -> {
                     Log.e("control", "location observe function in else HomeFragment")
@@ -103,9 +113,12 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun getLocations() {
+    private fun getLocations(pageNumber:Int) {
+        binding.pbLocationProgressBar.visibility = VISIBLE
+        binding.rwLocationList.visibility = GONE
+
         runBlocking {
-            apiViewModel.getLocations()
+            apiViewModel.getLocations(pageNumber)
         }
     }
 
@@ -152,6 +165,14 @@ class HomeFragment : Fragment() {
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         locationAdapter = LocationAdapter()
         binding.rwLocationList.adapter = locationAdapter
+
+        locationAdapterOnClickListener()
+
+        locationAdapterScrollListener(binding.rwLocationList)
+
+    }
+
+    private fun locationAdapterOnClickListener() {
         locationAdapter.getLocationId {
             binding.pbProgressBar.visibility = VISIBLE
             runBlocking {
@@ -167,5 +188,59 @@ class HomeFragment : Fragment() {
             locationAdapter.list = locationsAdapterList
         }
     }
+
+    private fun locationAdapterScrollListener(recyclerView:RecyclerView) {
+        recyclerView.addOnScrollListener(object:RecyclerView.OnScrollListener(){
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+
+                if(!recyclerView.canScrollHorizontally(1)){
+                    if(pageNumber == 7){
+                        Toast.makeText(requireContext(),"Son Sayfaya Ulaştınız!",Toast.LENGTH_LONG).show()
+                    }else{
+                        pageNumber++
+
+                        getLocations(pageNumber)
+                        recyclerView.layoutManager?.scrollToPosition(0)
+                    }
+                }else if(!recyclerView.canScrollHorizontally(-1)){
+                    if(pageNumber == 1){
+                        recyclerView.isNestedScrollingEnabled = false
+                        Toast.makeText(requireContext(),"$pageNumber. Sayfaya Ulaştınız!",Toast.LENGTH_LONG).show()
+                    }else{
+                        pageNumber--
+                        getLocations(pageNumber)
+                    }
+
+                }
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+            /*override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+               // if (dx>0){
+                    val visibleItemCount = binding.rwLocationList.layoutManager?.childCount
+                    val pastVisibleItem = (binding.rwLocationList.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                    val total = locationAdapter.itemCount
+
+                    if(isLoading){
+                        if (visibleItemCount != null) {
+                            if((visibleItemCount + pastVisibleItem) >= total){
+                                isLoading = false
+                                Log.e("kontrol","sayfa sonu")
+                                Log.e("kontrol","sayfa numarası önce $pageNumber")
+                                pageNumber++
+                                Log.e("kontrol","sayfa numarası sonra $pageNumber")
+                                getLocations(pageNumber)
+
+                            }
+                        }
+
+                    }
+               // }
+
+
+                super.onScrolled(recyclerView, dx, dy)
+            }*/
+        })
+    }
+
 
 }
