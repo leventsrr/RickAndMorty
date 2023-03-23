@@ -6,217 +6,245 @@
     <data>
 
     </data>
-
-   <androidx.constraintlayout.widget.ConstraintLayout
+   <ScrollView
        android:layout_width="match_parent"
        android:layout_height="match_parent">
-
-       <ImageView
-           android:id="@+id/iwBackButton"
-           android:layout_width="wrap_content"
+       <LinearLayout
+           android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:layout_marginStart="20dp"
-           android:layout_marginTop="24dp"
-           android:src="@drawable/ic_baseline_arrow_back_24"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent" />
+           android:orientation="vertical">
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="10dp">
 
-       <TextView
-           android:id="@+id/twCharacterName"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="20dp"
-           android:textSize="24sp"
-           android:fontFamily="@font/avenir_black"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent" />
+               <ImageView
+                   android:id="@+id/iwBackButton"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
 
-       <ImageView
-           android:id="@+id/iwCharacterImage"
-           android:layout_width="275dp"
-           android:layout_height="275dp"
-           android:layout_marginStart="50dp"
-           android:layout_marginTop="20dp"
-           android:layout_marginEnd="50dp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/twCharacterName" />
+                   android:layout_marginStart="10dp"
+                   android:src="@drawable/ic_baseline_arrow_back_24"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent" />
 
-       <TextView
-           android:id="@+id/textView"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="20dp"
-           android:layout_marginTop="20dp"
-           android:fontFamily="@font/avenir_black"
-           android:text="@string/characterStatusTitle"
-           android:textSize="22sp"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/iwCharacterImage" />
+               <TextView
+                   android:id="@+id/twCharacterName"
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:fontFamily="@font/avenir_black"
+                   android:textSize="30sp"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent" />
+           </androidx.constraintlayout.widget.ConstraintLayout>
 
-       <TextView
-           android:id="@+id/twCharacterStatus"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="150dp"
-           android:layout_marginTop="20dp"
-           android:layout_marginEnd="20dp"
-           android:fontFamily="@font/avenir_roman"
-           android:textSize="22sp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/iwCharacterImage" />
 
-       <TextView
-           android:id="@+id/textView2"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="20dp"
-           android:layout_marginTop="5dp"
-           android:fontFamily="@font/avenir_black"
-           android:text="@string/characterSpecyTitle"
-           android:textSize="22sp"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/textView" />
+           <ImageView
+               android:id="@+id/iwCharacterImage"
+               android:layout_width="275dp"
+               android:layout_height="275dp"
+               android:layout_marginHorizontal="50dp"
+               android:layout_marginVertical="20dp"/>
 
-       <TextView
-           android:id="@+id/twCharacterSpecy"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="150dp"
-           android:layout_marginTop="5dp"
-           android:layout_marginEnd="20dp"
-           android:fontFamily="@font/avenir_roman"
-           android:textSize="22sp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/twCharacterStatus" />
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="vertical"
+               android:layout_marginBottom="20dp"
+               >
 
-       <TextView
-           android:id="@+id/textView3"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="20dp"
-           android:layout_marginTop="5dp"
-           android:fontFamily="@font/avenir_black"
-           android:text="@string/characterGenderTitle"
-           android:textSize="22sp"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/textView2" />
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:layout_marginHorizontal="20dp"
+                   android:layout_marginBottom="5dp">
+                   <TextView
+                       android:id="@+id/textView"
+                       android:layout_width="0dp"
+                       android:layout_weight="2"
+                       android:layout_height="match_parent"
+                       android:fontFamily="@font/avenir_black"
+                       android:text="@string/characterStatusTitle"
+                       android:textColor="#191919"
+                       android:textSize="22sp"/>
 
-       <TextView
-           android:id="@+id/twCharacterGender"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="150dp"
-           android:layout_marginTop="5dp"
-           android:layout_marginEnd="20dp"
-           android:fontFamily="@font/avenir_roman"
-           android:textSize="22sp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/twCharacterSpecy" />
+                   <TextView
+                       android:id="@+id/twCharacterStatus"
+                       android:layout_width="0dp"
+                       android:layout_weight="3"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/avenir_roman"
+                       android:textColor="#191919"
+                       android:textSize="22sp" />
+               </LinearLayout>
 
-       <TextView
-           android:id="@+id/textView4"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="20dp"
-           android:layout_marginTop="5dp"
-           android:fontFamily="@font/avenir_black"
-           android:text="@string/characterOriginTitle"
-           android:textSize="22sp"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/textView3" />
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:layout_marginHorizontal="20dp"
+                   android:layout_marginBottom="5dp">
+                   <TextView
+                       android:id="@+id/textView2"
+                       android:layout_width="0dp"
+                       android:layout_weight="2"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/avenir_black"
+                       android:text="@string/characterSpecyTitle"
+                       android:textColor="#191919"
+                       android:textSize="22sp" />
 
-       <TextView
-           android:id="@+id/twCharacterOrigin"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="150dp"
-           android:layout_marginTop="5dp"
-           android:layout_marginEnd="20dp"
-           android:fontFamily="@font/avenir_roman"
-           android:textSize="22sp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/twCharacterGender" />
+                   <TextView
+                       android:id="@+id/twCharacterSpecy"
+                       android:layout_width="0dp"
+                       android:layout_weight="3"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/avenir_roman"
+                       android:textColor="#191919"
+                       android:textSize="22sp"/>
+               </LinearLayout>
 
-       <TextView
-           android:id="@+id/textView5"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="20dp"
-           android:layout_marginTop="5dp"
-           android:fontFamily="@font/avenir_black"
-           android:text="@string/characterLocationTitle"
-           android:textSize="22sp"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/textView4" />
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:layout_marginHorizontal="20dp"
+                   android:layout_marginBottom="5dp">
+                   <TextView
+                       android:id="@+id/textView3"
+                       android:layout_width="0dp"
+                       android:layout_weight="2"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/avenir_black"
+                       android:text="@string/characterGenderTitle"
+                       android:textColor="#191919"
+                       android:textSize="22sp" />
 
-       <TextView
-           android:id="@+id/twCharacterLocation"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="150dp"
-           android:layout_marginTop="5dp"
-           android:layout_marginEnd="20dp"
-           android:fontFamily="@font/avenir_roman"
-           android:textSize="22sp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/twCharacterOrigin" />
+                   <TextView
+                       android:id="@+id/twCharacterGender"
+                       android:layout_width="0dp"
+                       android:layout_weight="3"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/avenir_roman"
+                       android:textColor="#191919"
+                       android:textSize="22sp"/>
+               </LinearLayout>
 
-       <TextView
-           android:id="@+id/textView6"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="20dp"
-           android:layout_marginTop="5dp"
-           android:fontFamily="@font/avenir_black"
-           android:text="@string/characterEpisodesTitle"
-           android:textSize="22sp"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/textView5" />
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:layout_marginHorizontal="20dp"
+                   android:layout_marginBottom="5dp">
+                   <TextView
+                       android:id="@+id/textView4"
+                       android:layout_width="0dp"
+                       android:layout_weight="2"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/avenir_black"
+                       android:text="@string/characterOriginTitle"
+                       android:textColor="#191919"
+                       android:textSize="22sp" />
 
-       <TextView
-           android:id="@+id/twCharacterEpisodes"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="150dp"
-           android:layout_marginTop="5dp"
-           android:layout_marginEnd="20dp"
-           android:fontFamily="@font/avenir_roman"
-           android:textSize="22sp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/twCharacterLocation" />
+                   <TextView
+                       android:id="@+id/twCharacterOrigin"
+                       android:layout_width="0dp"
+                       android:layout_weight="3"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/avenir_roman"
+                       android:textColor="#191919"
+                       android:textSize="22sp" />
+               </LinearLayout>
 
-       <TextView
-           android:id="@+id/textView7"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="20dp"
-           android:layout_marginTop="5dp"
-           android:fontFamily="@font/avenir_black"
-           android:text="@string/characterCreatedAtTitle"
-           android:textSize="22sp"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/textView6" />
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:layout_marginHorizontal="20dp"
+                   android:layout_marginBottom="5dp">
+                   <TextView
+                       android:id="@+id/textView5"
+                       android:layout_width="0dp"
+                       android:layout_weight="2"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/avenir_black"
+                       android:text="@string/characterLocationTitle"
+                       android:textColor="#191919"
+                       android:textSize="22sp" />
 
-       <TextView
-           android:id="@+id/twCharacterCreatedAt"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="150dp"
-           android:layout_marginTop="5dp"
-           android:layout_marginEnd="20dp"
-           android:fontFamily="@font/avenir_roman"
-           android:textSize="22sp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/twCharacterEpisodes" />
+                   <TextView
+                       android:id="@+id/twCharacterLocation"
+                       android:layout_width="0dp"
+                       android:layout_weight="3"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/avenir_roman"
+                       android:textColor="#191919"
+                       android:textSize="22sp"/>
+               </LinearLayout>
 
-   </androidx.constraintlayout.widget.ConstraintLayout>
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:layout_marginHorizontal="20dp"
+                   android:layout_marginBottom="5dp">
+                   <TextView
+                       android:id="@+id/textView6"
+                       android:layout_width="0dp"
+                       android:layout_weight="2"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/avenir_black"
+                       android:text="@string/characterEpisodesTitle"
+                       android:textColor="#191919"
+                       android:textSize="22sp" />
+
+                   <TextView
+                       android:id="@+id/twCharacterEpisodes"
+                       android:layout_width="0dp"
+                       android:layout_weight="3"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/avenir_roman"
+
+
+                       android:textColor="#191919"
+                       android:textSize="22sp"/>
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:layout_marginHorizontal="20dp"
+                   android:layout_marginBottom="5dp">
+                   <TextView
+                       android:id="@+id/textView7"
+                       android:layout_width="0dp"
+                       android:layout_weight="2"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/avenir_black"
+                       android:text="@string/characterCreatedAtTitle"
+
+                       android:ellipsize="end"
+                       android:textColor="#191919"
+                       android:textSize="22sp" />
+
+                   <TextView
+                       android:layout_gravity="center"
+                       android:id="@+id/twCharacterCreatedAt"
+                       android:layout_width="0dp"
+                       android:layout_weight="3"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/avenir_roman"
+
+                       android:textColor="#191919"
+                       android:textSize="22sp"/>
+               </LinearLayout>
+
+           </LinearLayout>
+       </LinearLayout>
+   </ScrollView>
 </layout>

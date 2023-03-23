@@ -44,6 +44,11 @@ class LocationAdapter : RecyclerView.Adapter<LocationAdapter.LocationHolder>() {
 
     }
 
+
+    override fun getItemCount(): Int {
+        return list.size
+    }
+
     //manages the actions to be performed when clicking on the elements in the list
     private fun onClickHandler(rowItem: MaterialCardView, position: Int) {
         rowItem.setOnClickListener {
@@ -59,10 +64,6 @@ class LocationAdapter : RecyclerView.Adapter<LocationAdapter.LocationHolder>() {
             }
 
         }
-    }
-
-    override fun getItemCount(): Int {
-        return list.size
     }
 
     //allows us to obtain the id of the clicked location in the list

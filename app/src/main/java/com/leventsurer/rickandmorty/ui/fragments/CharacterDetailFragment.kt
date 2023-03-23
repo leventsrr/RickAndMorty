@@ -72,7 +72,7 @@ class CharacterDetailFragment : Fragment() {
             twCharacterGender.text = characterDetailModel.gender
             twCharacterOrigin.text = origin
             twCharacterLocation.text = location
-            twCharacterEpisodes.text = episodes.toString()
+            twCharacterEpisodes.text = episodes.toString().replace("[","").replace("]","")
             twCharacterCreatedAt.text = "${date?.get(0)} , ${date?.get(1)}"
             Glide.with(requireContext()).load(characterDetailModel.image).into(iwCharacterImage)
         }
@@ -83,8 +83,6 @@ class CharacterDetailFragment : Fragment() {
         arguments?.let {
             val argsModel = CharacterDetailFragmentArgs.fromBundle(it).characterDetailModel
             characterDetailModel = argsModel
-
-
         }
     }
 
