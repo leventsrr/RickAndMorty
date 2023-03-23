@@ -33,14 +33,18 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding get() = _binding!!
 
+    //view models
     private val apiViewModel by viewModels<ApiViewModel>()
 
+    //adapter lists
     private var locationsAdapterList = ArrayList<Result>()
     private var characterAdapterList = ArrayList<CharacterDetailModel>()
     private var characterIdArray = ArrayList<Int>()
 
+    //default page number for location request
     private var pageNumber = 1
-    private var isLoading = true
+
+    //adapters
     private lateinit var characterAdapter: CharacterAdapter
     private lateinit var locationAdapter: LocationAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +71,7 @@ class HomeFragment : Fragment() {
         subscribeCharactersById()
     }
 
-
+    //Listens for data obtained by aggregating and requesting a list of multiple characters
     private fun subscribeCharactersById() {
         apiViewModel.characters.observe(viewLifecycleOwner) {
             when (it) {
@@ -90,7 +94,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-
+    //Listens for the locations to be listed in the horizontal list
     private fun subscribeLocationsObserve() {
         apiViewModel.locations.observe(viewLifecycleOwner) {
             when (it) {
@@ -114,6 +118,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    //Assigns a location request according to the given page number
     private fun getLocations(pageNumber: Int) {
         binding.pbLocationProgressBar.visibility = VISIBLE
         binding.rwLocationList.visibility = GONE
@@ -123,7 +128,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-
+    //Sets up the character list
     private fun setupCharacterAdapter() {
         binding.rwCharacterList.layoutManager = LinearLayoutManager(requireContext())
         characterAdapter = CharacterAdapter()
@@ -134,6 +139,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    //When one of the locations in the horizontal list is clicked, it listens for the response of the location request to get the characters in it
     private fun subscribeLocationObserve() {
         apiViewModel.location.observe(viewLifecycleOwner) {
             when (it) {
@@ -161,6 +167,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    //Sets up the location list
     private fun setupLocationAdapter() {
         binding.rwLocationList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -172,12 +179,13 @@ class HomeFragment : Fragment() {
         locationAdapterScrollListener(binding.rwLocationList)
 
     }
+
     //Performs the actions to be performed when clicking on the elements listed in RecyclerView
     private fun locationAdapterOnClickListener() {
         locationAdapter.getLocationId {
             binding.pbProgressBar.visibility = VISIBLE
             runBlocking {
-                Log.e("kontrol", "id ye göre istek atıldı")
+                Log.e("control", "id ye göre istek atıldı")
                 apiViewModel.getALocationById(it)
             }
         }
@@ -189,6 +197,7 @@ class HomeFragment : Fragment() {
             locationAdapter.list = locationsAdapterList
         }
     }
+
     //RecyclerView also performs lazy load to fetch new locations
     private fun locationAdapterScrollListener(recyclerView: RecyclerView) {
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {

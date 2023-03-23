@@ -52,12 +52,6 @@ class AppModule {
             .client(okHttpClient)
             .build()
     }
-    /*
-    @Singleton
-    @Provides
-    fun getRetrofitServiceInstance(retrofit:Retrofit):  {
-        return retrofit.create(ProductApi::class.java)
-    }*/
 
     @Singleton
     @Provides

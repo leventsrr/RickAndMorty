@@ -21,7 +21,9 @@ import java.time.format.DateTimeFormatter
 class CharacterDetailFragment : Fragment() {
     private var _binding: FragmentCharacterDetailBinding? = null
     private val binding: FragmentCharacterDetailBinding get() = _binding!!
-    private lateinit var characterDetailModel : CharacterDetailModel
+
+    //view models
+    private lateinit var characterDetailModel: CharacterDetailModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,18 +34,18 @@ class CharacterDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentCharacterDetailBinding.inflate(inflater,container,false)
+        _binding = FragmentCharacterDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         handleArguments()
         setupUi()
         onClickHandler()
     }
 
+    //performs the events of clicking on the buttons on the screen
     private fun onClickHandler() {
         binding.apply {
             iwBackButton.setOnClickListener {
@@ -52,12 +54,13 @@ class CharacterDetailFragment : Fragment() {
         }
     }
 
+    //allows data from the previous page to be linked to the interface
     @SuppressLint("SetTextI18n")
     private fun setupUi() {
         val origin = Origin(characterDetailModel.origin?.name).name
         val location = Location(characterDetailModel.location?.name).name
-        val episodes  = arrayListOf<String>()
-        for(episode in characterDetailModel.episode){
+        val episodes = arrayListOf<String>()
+        for (episode in characterDetailModel.episode) {
             episodes.add(episode.split("/").last())
         }
         val date = characterDetailModel.created?.let { modifyDateLayout(it) }
@@ -75,6 +78,7 @@ class CharacterDetailFragment : Fragment() {
         }
     }
 
+    //Pulls the submitted model from the homepage
     private fun handleArguments() {
         arguments?.let {
             val argsModel = CharacterDetailFragmentArgs.fromBundle(it).characterDetailModel

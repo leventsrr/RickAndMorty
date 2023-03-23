@@ -53,7 +53,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterHolder>(
 
         }
 
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             moveDetailPage.let {
                 if (it != null) {
                     it(list[position])
@@ -66,6 +66,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterHolder>(
         return list.size
     }
 
+    //redirects to the detail page with the data of the character clicked from the list
     private var moveDetailPage: ((character: CharacterDetailModel) -> Unit)? = null
     fun moveDetailPage(f: ((character: CharacterDetailModel) -> Unit)) {
         moveDetailPage = f

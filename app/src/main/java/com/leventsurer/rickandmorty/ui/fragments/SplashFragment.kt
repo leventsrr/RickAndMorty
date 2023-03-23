@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SplashFragment : Fragment() {
     private var _binding: FragmentSplashBinding? = null
     private val binding: FragmentSplashBinding get() = _binding!!
-    private var isLogin:Boolean = false
+    private var isLogin: Boolean = false
     private val sharedPrefViewModel by viewModels<SharedPreferencesViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +29,7 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentSplashBinding.inflate(inflater,container,false)
+        _binding = FragmentSplashBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -39,6 +39,7 @@ class SplashFragment : Fragment() {
         onClickHandler()
     }
 
+    //Gets information about whether the application has been logged in before from shared preferences
     @SuppressLint("SetTextI18n")
     private fun getIsLoginInfo() {
         isLogin = sharedPrefViewModel.readIsLoginInfo()
@@ -46,6 +47,7 @@ class SplashFragment : Fragment() {
         sharedPrefViewModel.writeIsLoginInfo(true)
     }
 
+    // //performs the events of clicking on the buttons on the screen
     private fun onClickHandler() {
         binding.apply {
             btnNavigateHome.setOnClickListener {

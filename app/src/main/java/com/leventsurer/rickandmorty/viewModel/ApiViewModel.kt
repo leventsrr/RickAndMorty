@@ -32,7 +32,7 @@ class ApiViewModel @Inject constructor(
      suspend fun getLocations(pageNumber:Int) = viewModelScope.launch {
         _locations.value = Resource.Loading
         val result = apiRepository.getLocations(pageNumber)
-         Log.e("kontrol","ViewModel result $result")
+         Log.e("control","ViewModel result $result")
         _locations.value = result
     }
 
@@ -45,7 +45,7 @@ class ApiViewModel @Inject constructor(
     suspend fun getMultipleCharacterById(characterIds:ArrayList<Int>) = viewModelScope.launch {
         _characters.value = Resource.Loading
         val result = apiRepository.getMultipleCharacterById(characterIds)
-        Log.e("kontrol","result:$result")
+        Log.e("control","result:$result")
         _characters.value = result
     }
 

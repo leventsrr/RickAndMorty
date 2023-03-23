@@ -37,17 +37,18 @@ class LocationAdapter : RecyclerView.Adapter<LocationAdapter.LocationHolder>() {
         holder.binding.apply {
             val currentItem = list[position]
             twLocationName.text = currentItem.name
-            changeSelectedLocationStyle(position,twLocationName)
-            onClickHandler(mcwCharacterRow,position)
+            changeSelectedLocationStyle(position, twLocationName)
+            onClickHandler(mcwCharacterRow, position)
         }
 
 
     }
 
-    private fun onClickHandler(rowItem:MaterialCardView,position: Int) {
+    //manages the actions to be performed when clicking on the elements in the list
+    private fun onClickHandler(rowItem: MaterialCardView, position: Int) {
         rowItem.setOnClickListener {
             getLocationId.let {
-                if(it != null){
+                if (it != null) {
                     it(list[position].id)
                 }
             }
@@ -64,20 +65,22 @@ class LocationAdapter : RecyclerView.Adapter<LocationAdapter.LocationHolder>() {
         return list.size
     }
 
+    //allows us to obtain the id of the clicked location in the list
     private var getLocationId: ((locationId: Int) -> Unit)? = null
     fun getLocationId(f: ((locationId: Int) -> Unit)) {
         getLocationId = f
     }
 
-    private var getSelectedLocation: ((position:Int) -> Unit)? = null
-    fun getSelectedLocation(f: ((position:Int) -> Unit)) {
+    //allows to get the position information to change the design of the clicked location in the list
+    private var getSelectedLocation: ((position: Int) -> Unit)? = null
+    fun getSelectedLocation(f: ((position: Int) -> Unit)) {
         getSelectedLocation = f
     }
 
-    private fun changeSelectedLocationStyle(position: Int,locationText:TextView){
-        if(list[position].isSelected){
+    private fun changeSelectedLocationStyle(position: Int, locationText: TextView) {
+        if (list[position].isSelected) {
             locationText.setTextColor(Color.parseColor("#3AB54A"))
-        }else{
+        } else {
             locationText.setTextColor(Color.parseColor("#191919"))
         }
     }

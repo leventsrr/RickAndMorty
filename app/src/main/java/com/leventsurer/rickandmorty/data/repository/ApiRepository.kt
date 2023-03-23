@@ -17,7 +17,7 @@ class ApiRepository @Inject constructor(
     suspend fun getLocations(pageNumber:Int) :Resource<LocationsModel> {
         val response : Response<LocationsModel> = api.getLocations(pageNumber)
         return if(response.isSuccessful){
-            Log.e("kontrol","ApiRepository response ${response.body()}")
+            Log.e("control","ApiRepository response ${response.body()}")
             Resource.Success(response.body()!!)
         }else{
             Resource.Failure(HttpException(response))
