@@ -5,6 +5,7 @@
 * Shared Preferences
 * Glide
 * Navigation
+* Live Data
 * Retrofit
 * Okhttp
 * Coroutines
